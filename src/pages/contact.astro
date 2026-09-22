@@ -1,0 +1,266 @@
+---
+import '../styles/contact.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Gedion Mutua — Contact"
+  description="Contact Gedion Mutua — Environmental and Biosystems Engineer and Certified Sustainable Finance Expert."
+>
+  <!--
+    ============================================================
+    CONTACT HERO — split card matching the supplied reference
+    ============================================================
+  -->
+  <div class="contact-page">
+    <div class="hero-nav-wrap">
+      <nav aria-label="Primary navigation" class="hero-nav">
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/work">Work</a>
+        </div>
+        <a class="nav-cta" href="/contact">Let's Talk</a>
+      </nav>
+    </div>
+
+    <main class="contact-stage">
+      <div class="contact-card">
+        <div class="contact-form-panel">
+          <h1>Book a 1:1 Session</h1>
+          <p class="lead">
+            Book Gedion for <strong>$15 / hour</strong>. Choose a payment
+            method to get your booking steps.
+          </p>
+
+          <button class="send-btn" id="payNowBtn" type="button">
+            Pay now
+            <span class="arrow-circle">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.4"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <p class="payment-note">
+            By booking, you agree to our
+            <a href="/terms">Terms of Service</a> and
+            <a href="/privacy">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <div class="contact-photo-panel">
+          <img alt="Gedion Mutua" src="/images/contact-section-img.webp" />
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!--
+    ============================================================
+    PAY MODAL
+    ============================================================
+  -->
+  <div class="modal-overlay" hidden id="payModal">
+    <div aria-labelledby="modalTitle" aria-modal="true" class="modal-box" role="dialog">
+      <button aria-label="Close" class="modal-close" id="modalClose" type="button">
+        ×
+      </button>
+
+      <!-- Method selection pane -->
+      <div class="modal-pane" id="paneSelect">
+        <h3 id="modalTitle">How would you like to pay?</h3>
+        <p class="modal-sub">$15 / hour — pick a method to see the next steps.</p>
+
+        <div class="method-grid">
+          <button class="method-btn" id="selectMpesa" type="button">
+            <span class="method-icon mpesa-icon">M</span>
+            <span>M-Pesa</span>
+          </button>
+
+          <button class="method-btn" id="selectCard" type="button">
+            <span class="method-icon card-icon">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <rect height="14" rx="2.5" width="20" x="2" y="5"></rect>
+                <path d="M2 10h20"></path>
+              </svg>
+            </span>
+            <span>Card</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- M-Pesa pane -->
+      <div class="modal-pane" hidden id="paneMpesa">
+        <button class="modal-back" data-back type="button">← Back</button>
+        <h3>Pay with M-Pesa</h3>
+
+        <ol class="book-steps">
+          <li>
+            <span class="step-num">1</span>
+            <div>
+              <p class="step-title">Send payment via M-Pesa</p>
+              <p class="step-copy">
+                Send <strong>KES 2,000</strong> (≈ $15) using Send Money to:
+              </p>
+              <div class="mpesa-box">
+                <span id="mpesaNumber">0707 119 392</span>
+                <button class="copy-btn" id="copyBtn" type="button">Copy</button>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <span class="step-num">2</span>
+            <div>
+              <p class="step-title">Enter your confirmation details</p>
+              <p class="step-copy">
+                Type the name and code from your M-Pesa confirmation message —
+                it goes straight to Gedion on WhatsApp, no screenshot needed.
+              </p>
+              <div class="contact-field">
+                <input id="mpesaName" placeholder="M-Pesa name (e.g. JOHN DOE)" type="text" />
+              </div>
+              <div class="contact-field" style="margin-bottom: 0;">
+                <input id="mpesaCode" placeholder="M-Pesa code (e.g. QFT7X8Y9Z1)" type="text" />
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <button class="send-btn" disabled id="sendMpesaWhatsapp" type="button">
+          Send to WhatsApp
+          <span class="arrow-circle">
+            <svg
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.4"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </span>
+        </button>
+
+        <p class="payment-note">
+          Payments are confirmed manually and aren't instant — Gedion will
+          verify your M-Pesa code on WhatsApp and confirm your booking. See
+          the <a href="/terms">Terms of Service</a> for cancellations and
+          refunds.
+        </p>
+      </div>
+
+      <!-- Card pane -->
+      <div class="modal-pane" hidden id="paneCard">
+        <button class="modal-back" data-back type="button">← Back</button>
+        <h3>Pay with Card</h3>
+        <p class="modal-sub">
+          Card payments are coming soon. For now, please use M-Pesa to book
+          your session.
+        </p>
+
+        <button class="send-btn" id="cardUseMpesa" type="button">
+          Use M-Pesa instead
+          <span class="arrow-circle">
+            <svg
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.4"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand-wrap">
+        <a aria-label="Gedion Mutua home" class="footer-brand" href="/">GM</a>
+        <p class="footer-tagline">
+          Environmental Engineering · Sustainable Finance · Climate
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/work">Work</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Social Media</h3>
+        <div class="footer-social">
+                  <a href="https://wa.me/254707119392" target="_blank" rel="noopener" aria-label="Contact Gedion on WhatsApp">
+          <span class="social-icon whatsapp-icon" aria-hidden="true" style="background:transparent; color:#25D366; font-size:22px;">
+            <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" focusable="false">
+              <path fill="#25D366" d="M16 3C8.82 3 3 8.82 3 16c0 2.29.6 4.45 1.74 6.36L3.1 29l6.82-1.79A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3Z"/>
+              <path fill="#fff" d="M22.78 18.93c-.37-.19-2.2-1.09-2.54-1.21-.34-.13-.59-.19-.84.19-.25.37-.96 1.21-1.18 1.46-.22.25-.43.28-.8.09-.37-.19-1.56-.57-2.97-1.82-1.1-.98-1.84-2.2-2.05-2.57-.22-.37-.02-.57.16-.75.17-.17.37-.43.56-.65.19-.22.25-.37.37-.62.13-.25.06-.47-.03-.65-.09-.19-.84-2.02-1.15-2.77-.3-.73-.61-.63-.84-.64h-.72c-.25 0-.65.09-.99.47-.34.37-1.3 1.27-1.3 3.1s1.33 3.6 1.52 3.85c.19.25 2.62 4 6.35 5.6.89.38 1.58.61 2.12.78.89.28 1.7.24 2.34.15.71-.11 2.2-.9 2.51-1.77.31-.87.31-1.62.22-1.77-.09-.16-.34-.25-.71-.43Z"/>
+            </svg>
+          </span>
+          <span>WhatsApp</span>
+        </a>
+
+          <a
+            aria-label="Visit Gedion on LinkedIn"
+            class="footer-linkedin-icon"
+            href="https://www.linkedin.com/in/gedion-mutua-841481100/"
+            rel="noopener"
+            target="_blank"
+          >
+            <img alt="" aria-hidden="true" src="/images/linkedin-icon.svg" />
+            <span>LinkedIn</span>
+          </a>
+
+          <a aria-label="Email Gedion" href="mailto:gedionmutua@gmail.com">
+            <span aria-hidden="true" class="social-icon email-icon">✉</span>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    aria-label="Visit Gedion on LinkedIn"
+    class="floating-linkedin"
+    href="https://www.linkedin.com/in/gedion-mutua-841481100/"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <img alt="LinkedIn" src="/images/linkedin-icon.svg" />
+  </a>
+
+  <script src="/contact.js" is:inline></script>
+</BaseLayout>

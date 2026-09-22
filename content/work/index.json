@@ -1,0 +1,112 @@
+{
+  "seoDescription": "Work experience — Gedion Mutua, Environmental and Biosystems Engineer and Certified Sustainable Finance Expert.",
+  "title": "Gedion Mutua — Work",
+  "heading": "WORK EXPERIENCE",
+  "backgroundImage": "/images/work-section-img.webp",
+  "heroImage": "/images/work-section-img.webp",
+  "introParagraphs": [
+    "Over a decade of moving between community-facing coordination and technical, finance-facing roles — always at the intersection of clean energy, sustainability and measurable impact.",
+    "From regional programme delivery to client relationship management inside a leading bank, I've learned to translate environmental and social goals into language that funders, institutions and communities can all act on.",
+    "Below is a closer look at where that experience comes from — the organisations, the timelines, and the skills each one built. Tap any role to see the detail."
+  ],
+  "experienceHeading": "Roles & Experience",
+  "roles": [
+    {
+      "id": "regional-coordinator",
+      "title": "Regional Coordinator",
+      "company": "Equity Group Foundation · Full-time",
+      "dates": "Nov 2020 – Present · 5 yrs 11 mos",
+      "location": "Nairobi County, Kenya · On-site",
+      "logo": "/images/equity-group-foundation-logo.webp",
+      "description": [
+        "Supports Kenya's off-grid and solar access program as a field officer, promoting solar and clean cooking alternatives in areas like Isiolo, Marsabit, Turkana, and West Pokot.",
+        "Acts as a project officer for a NORAD-funded project, targeting startups and SMEs in blue economy, marine litter, renewable energy, and clean cooking under the Financing Innovation N Entrepreneurship (FINE) program.",
+        "Implements ESG risk screening and environmental/social safeguards within the group.",
+        "Advocates for institutional conversion to clean cooking and solar for heating and lighting.",
+        "Supports small businesses in transitioning to solar energy to improve reliability and reduce emissions.",
+        "Helps commercial and industrial enterprises adopt renewable energy and energy efficiency to boost production and cut emissions.",
+        "Champions tree planting nationwide to increase forest cover, restore degraded lands, and combat climate change.",
+        "Serves as a Water, Sanitation & Hygiene specialist, promoting water harvesting, storage, efficiency, treatment, and recycling.",
+        "Supports climate-smart agriculture to improve adaptation and resilience for farmers and their value chains."
+      ],
+      "skills": ["Renewable Energy Finance", "ESG Integration & Analysis", "Environmental Impact Assessment", "Strategic Planning", "Governance, Risk Management & Compliance (GRC)", "Public Speaking"]
+    },
+    {
+      "id": "relationship-officer",
+      "title": "Relationship Officer",
+      "company": "Nairobi Water Company · Internship",
+      "dates": "Apr 2017 – Sep 2017 · 6 mos",
+      "location": "Nairobi County, Kenya",
+      "logo": "/images/nairobi-water.webp",
+      "description": ["Supported customer-facing operations at the water utility, handling client queries and account-related requests during the internship."],
+      "skills": ["Customer Service", "Research"]
+    },
+    {
+      "id": "relationship-officer-operations",
+      "title": "Relationship Officer, Operations",
+      "company": "Equity Bank Limited · Part-time",
+      "dates": "Jun 2016 – Sep 2016 · 4 mos",
+      "location": "Nairobi County, Kenya · On-site",
+      "logo": "/images/equity-bank.webp",
+      "description": [
+        "Managed bulk transactions as a Corporate Teller, including foreign exchange (FOREX) and money transfers (e.g., MoneyGram and Western Union).",
+        "Ensured compliance with regulatory frameworks such as AML and KYC policies.",
+        "Maintained meticulous records of all financial transactions in accordance with bank procedures, supporting audit and compliance requirements.",
+        "Provided financial advisory services to corporate clients and supported digital banking rollout and customer onboarding."
+      ],
+      "skills": ["Customer Service", "Sales", "Governance, Risk Management & Compliance (GRC)", "Microsoft Office"]
+    },
+    {
+      "id": "relationship-officer-accounts",
+      "title": "Relationship Officer, Accounts",
+      "company": "Equity Bank Limited · Part-time",
+      "dates": "Mar 2015 – Sep 2015 · 7 mos",
+      "location": "Kenya · On-site",
+      "logo": "/images/equity-bank.webp",
+      "description": [
+        "Ensured strict adherence to Anti-Money Laundering (AML) and Know Your Customer (KYC) policies, maintaining compliance with regulatory standards.",
+        "Achieved 100% compliance with the bank's policies and procedures during account opening processes.",
+        "Assisted in end-of-month financial closing activities, ensuring accuracy in taxation procedures.",
+        "Facilitated the opening of bank accounts, prioritizing access for vulnerable groups, including orphaned children and the elderly."
+      ],
+      "skills": ["Governance, Risk Management & Compliance (GRC)", "Microsoft Excel", "Customer Service"]
+    }
+  ],
+  "photoBadgeTitle": "Serena Hotel",
+  "photoBadgeLocation": "Nairobi, Kenya",
+  "skillsHeading": "Skills & Expertise",
+  "skillsIntro": "Core areas I bring to a project, from early-stage assessment through to on-the-ground delivery. Filter by category, or browse the full set.",
+  "skills": [
+    { "name": "ESG Integration & Analysis", "category": "tools", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Impact Investing", "category": "industry", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Transparency & Reporting", "category": "tools", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Governance, Risk Management, and Compliance (GRC)", "category": "industry", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Renewable Energy Finance", "category": "tools", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Strategy Development", "category": "interpersonal", "source": "Frankfurt School of Finance & Management", "logo": "/images/frankfurt-school.webp" },
+    { "name": "Environmental Impact Assessment, Environmental Audits", "category": "tools", "source": "Environmental Impact Assessment / Audit Expert", "logo": "" },
+    { "name": "Customer Service", "category": "industry", "source": "", "logo": "" },
+    { "name": "Microsoft Office", "category": "tools", "source": "", "logo": "" },
+    { "name": "Management", "category": "interpersonal", "source": "", "logo": "" },
+    { "name": "Strategic Planning", "category": "interpersonal", "source": "", "logo": "" },
+    { "name": "Project Management", "category": "industry", "source": "", "logo": "" },
+    { "name": "Microsoft Excel", "category": "tools", "source": "", "logo": "" },
+    { "name": "Sales", "category": "industry", "source": "", "logo": "" },
+    { "name": "Public Speaking", "category": "interpersonal", "source": "", "logo": "" },
+    { "name": "Marketing", "category": "industry", "source": "", "logo": "" },
+    { "name": "Research", "category": "industry", "source": "", "logo": "" }
+  ],
+  "academicHeading": "Academic Background",
+  "educationHeading": "Education",
+  "education": [
+    { "institution": "Frankfurt School of Finance & Management", "program": "Certified expert in sustainable finance", "dates": "Mar 2025 – Oct 2025", "logo": "/images/frankfurt-school.webp", "skills": ["ESG Integration & Analysis", "Impact Investing"] },
+    { "institution": "Strathmore University", "program": "Master's degree, Sustainable energy transitions", "dates": "May 2025 – May 2027", "logo": "/images/strathmore-university.webp", "skills": [] },
+    { "institution": "University of Nairobi", "program": "Bachelor of Engineering – BE, Environmental & Biosystems Engineering", "dates": "", "logo": "/images/university-of-nairobi.webp", "skills": [] }
+  ],
+  "certificationsHeading": "Licenses & Certifications",
+  "certifications": [
+    { "title": "Certified Expert in Sustainable Finance", "issuer": "Frankfurt School Sustainable World Academy", "issued": "Issued Oct 2025 · Credential ID 163846143", "logo": "/images/frankfurt-school.webp" },
+    { "title": "Data Analytics", "issuer": "ALX Africa", "issued": "Issued May 2025", "logo": "/images/alx-africa.webp" },
+    { "title": "Environmental Impact Assessment / Audit Expert", "issuer": "National Environment Management Authority", "issued": "Issued Sep 2024", "logo": "/images/nema.webp" },
+    { "title": "Sustainability", "issuer": "University of Cambridge", "issued": "Issued Mar 2024", "logo": "/images/university-of-cambridge.webp" }
+  ]
+}

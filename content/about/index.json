@@ -1,0 +1,19 @@
+{
+  "seoDescription": "About Gedion Mutua — Environmental and Biosystems Engineer and Certified Sustainable Finance Expert.",
+  "title": "Gedion Mutua — About",
+  "heading": "ABOUT ME",
+  "backgroundImage": "/images/about-section-img.webp",
+  "paragraphs": [
+    "I’m an Environmental and Biosystems Engineer and a Certified Expert in Sustainable Finance, passionate about accelerating Africa’s transition to clean energy, ESG integration, WASH solutions, and environmental conservation. I lead initiatives that promote the adoption of solar, wind, water, and biofuel technologies to power homes, institutions, and industries more efficiently and sustainably.",
+    "I combine technical engineering insights with financial analysis to demonstrate the value of clean energy investments thus helping communities and businesses lower costs, boost efficiency, and reduce carbon emissions. My work bridges the gap between environmental sustainability and financial performance, ensuring that every project delivers measurable impact and long-term value.",
+    "Beyond energy access, I focus on strengthening water, sanitation, and hygiene (WASH) systems, promoting climate resilience, and restoring ecosystems through reforestation and conservation efforts. By merging innovation, finance, and sustainability principles, I aim to build a future where clean energy, safe water, and thriving ecosystems power inclusive growth and prosperity for all."
+  ],
+  "details": [
+    { "title": "Energy & Environmental Engineer", "description": "Technical engineering insight focused on clean energy, environmental conservation and practical climate solutions." },
+    { "title": "Sustainable Finance Expert", "description": "Financial analysis that helps demonstrate the value and impact of clean energy and sustainability investments." },
+    { "title": "EIA Assessment", "description": "Environmental Impact Assessments that identify risks early and guide projects toward compliant, sustainable outcomes." },
+    { "title": "Audit", "description": "Environmental and sustainability audits that verify performance, flag gaps and support accountable reporting." },
+    { "title": "W.A.S.H", "description": "Strengthening water, sanitation and hygiene systems to support healthier, more resilient communities." },
+    { "title": "Climate Risk", "description": "Assessing climate risk and resilience to help institutions plan for a changing environment." }
+  ]
+}

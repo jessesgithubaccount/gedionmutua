@@ -1,0 +1,1241 @@
+/* ============================================================
+     TOKEN ARCHITECTURE — Primitive → Semantic → Component
+     Paper, white and dark-green theme — matches about.html.
+     ============================================================ */
+
+  :root {
+    /* --- Primitive tokens --- */
+    --primitive-color-neutral-0: #ffffff;
+    --primitive-color-neutral-50: #f7f7f4;
+    --primitive-color-neutral-100: #f1f1ee;
+    --primitive-color-neutral-200: #e2e4e0;
+    --primitive-color-neutral-500: #62685f;
+    --primitive-color-neutral-900: #111817;
+
+    --primitive-color-green-50: #eaf1ec;
+    --primitive-color-green-100: #cfe0d5;
+    --primitive-color-green-500: #173f2d;
+    --primitive-color-green-600: #0d2a1e;
+    --primitive-color-amber-400: #f5b400;
+    --primitive-color-whatsapp-500: #25d366;
+
+    --primitive-spacing-2: 0.5rem;
+    --primitive-spacing-4: 1rem;
+    --primitive-spacing-6: 1.5rem;
+    --primitive-spacing-8: 2rem;
+
+    --primitive-radius-lg: 1rem;
+    --primitive-radius-xl: 1.5rem;
+    --primitive-radius-2xl: 2rem;
+    --primitive-radius-full: 9999px;
+
+    --primitive-shadow-sm: 0 2px 10px rgb(17 24 23 / 0.08);
+    --primitive-shadow-md: 0 12px 32px rgb(17 24 23 / 0.12);
+    --primitive-shadow-xl: 0 30px 70px rgb(17 24 23 / 0.18);
+
+    --primitive-duration-fast: 180ms;
+    --primitive-duration-base: 300ms;
+    --primitive-easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* --- Semantic tokens ---
+       Flipped to a light "paper" theme (matches about.html): white/paper
+       surfaces, dark ink text, dark green as the accent instead of the
+       background. */
+    --color-page-bg: var(--primitive-color-neutral-50);
+    --color-surface: var(--primitive-color-neutral-0);
+    --color-surface-soft: var(--primitive-color-neutral-100);
+    --color-foreground: var(--primitive-color-neutral-900);
+    --color-foreground-muted: rgba(17, 24, 23, 0.62);
+    --color-border: rgba(17, 24, 23, 0.11);
+    --color-border-strong: var(--primitive-color-green-100);
+
+    --color-accent: var(--primitive-color-green-500);
+    --color-accent-hover: var(--primitive-color-green-600);
+    --color-accent-soft: rgba(23, 63, 45, 0.08);
+    --color-accent-foreground: var(--primitive-color-neutral-0);
+    --color-star: var(--primitive-color-amber-400);
+
+    --color-nav-link: var(--primitive-color-neutral-0);
+    --color-nav-link-muted: rgba(255, 255, 255, 0.66);
+
+    --spacing-nav-y: 0.85rem;
+    --spacing-nav-gap: 2rem;
+    --spacing-card-padding: clamp(1.5rem, 4vw, 2.75rem);
+
+    --radius-shell: var(--primitive-radius-2xl);
+    --radius-card: var(--primitive-radius-xl);
+
+    --duration-interaction: var(--primitive-duration-base);
+    --easing-interaction: var(--primitive-easing-out);
+
+    /* --- Component tokens --- */
+    --nav-pill-bg: var(--color-surface-soft);
+    --card-bg: var(--color-surface);
+    --card-bg-soft: var(--color-accent-soft);
+    --card-border: var(--color-border);
+    --card-radius: var(--radius-card);
+    --card-shadow-rest: var(--primitive-shadow-sm);
+    --card-shadow-hover: var(--primitive-shadow-md);
+    --card-lift-hover: -4px;
+
+    --badge-bg: var(--color-accent-soft);
+    --badge-border: var(--color-border-strong);
+    --badge-fg: var(--color-accent-hover);
+
+    --button-bg: var(--color-accent);
+    --button-bg-hover: var(--color-accent-hover);
+    --button-fg: var(--color-accent-foreground);
+    --button-radius: var(--primitive-radius-full);
+    --button-lift-hover: -2px;
+
+    --icon-chip-bg: var(--color-surface);
+    --icon-chip-fg: var(--color-accent);
+  }
+
+  * { font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
+
+  body {
+    background: var(--color-page-bg);
+    color: var(--color-foreground);
+  }
+
+  /* ============================================================
+     PAGE SHELL — full-bleed: content runs edge-to-edge on the
+     page background instead of floating inside a rounded card.
+     A blurred photo sits behind everything here (nav + main),
+     with a light tint over it so text and cards stay readable.
+     The footer sits outside .work-hero and is unaffected.
+     ============================================================ */
+  .work-hero {
+    position: relative;
+    min-height: 40vh;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--primitive-color-neutral-50);
+  }
+
+  .work-hero::before {
+    content: "";
+    position: absolute;
+    inset: -35px;
+    z-index: -2;
+    pointer-events: none;
+    background: url("/work-section-img-bkg.webp") center center / cover no-repeat;
+    filter: blur(7px);
+    transform: scale(1.05);
+  }
+
+  .work-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: rgba(245, 241, 231, .24);
+  }
+
+  /* ============================================================
+     ABOUT-STYLE CARD — the solid green rectangle used for the
+     hero intro, copied from about.html so both pages share a
+     visual signature.
+     ============================================================ */
+  .about-card {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 5vw, 5.75rem);
+    background: var(--primitive-color-green-500);
+    color: #fff;
+    box-shadow: 0 28px 70px rgba(15, 39, 27, .18);
+  }
+
+  .about-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 7px;
+    height: 100%;
+    background: rgba(255, 255, 255, .08);
+  }
+
+  .about-card h1 {
+    margin: 0 auto 1.75rem;
+    font-size: clamp(1.9rem, 3.4vw, 3rem);
+    line-height: 1.06;
+    letter-spacing: -.05em;
+    font-weight: 900;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .about-card-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.25rem;
+  }
+
+  .about-card-body p {
+    margin: 0;
+    color: rgba(255, 255, 255, .82);
+    font-size: 14.5px;
+    line-height: 1.85;
+  }
+
+  @media (max-width: 900px) {
+    .about-card-body {
+      grid-template-columns: 1fr;
+      gap: 1.15rem;
+    }
+  }
+
+  /* ============================================================
+     NAV — soft lavender pill bar, matches reference nav treatment
+     ============================================================ */
+  .nav-pill {
+    background: var(--nav-pill-bg);
+    border-radius: var(--primitive-radius-full);
+  }
+  .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--color-nav-link);
+    font-weight: 600;
+    transition: color var(--duration-interaction) var(--easing-interaction);
+  }
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--color-accent);
+  }
+  .nav-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+  }
+
+  /* ============================================================
+     CTA BUTTON — solid indigo, rounded-full
+     ============================================================ */
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--button-bg);
+    color: var(--button-fg);
+    border-radius: var(--button-radius);
+    font-weight: 600;
+    transition: background-color var(--duration-interaction) var(--easing-interaction),
+                transform var(--duration-interaction) var(--easing-interaction),
+                box-shadow var(--duration-interaction) var(--easing-interaction);
+    will-change: transform;
+  }
+  .cta-button:hover,
+  .cta-button:focus-visible {
+    background: var(--button-bg-hover);
+    transform: translateY(var(--button-lift-hover));
+    box-shadow: var(--card-shadow-hover);
+  }
+  .cta-button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* ============================================================
+     GLASS→SOFT CARD — now a plain light card with a soft shadow
+     instead of a dark blurred panel.
+     ============================================================ */
+  .glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-rest);
+    padding: var(--spacing-card-padding);
+    transition: transform var(--duration-interaction) var(--easing-interaction),
+                box-shadow var(--duration-interaction) var(--easing-interaction),
+                border-color var(--duration-interaction) var(--easing-interaction);
+  }
+
+  /* ============================================================
+     SECTION BLEND — no longer paints its own background here, so
+     the work-hero's blurred photo backdrop shows through behind
+     the Skills section too, matching the rest of the page.
+     ============================================================ */
+  .section-blend {
+    background: transparent;
+  }
+
+  /* ============================================================
+     EYEBROW — small dot + label above a headline
+     ============================================================ */
+  .eyebrow-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--primitive-radius-full);
+    background: var(--color-accent);
+  }
+
+  /* ============================================================
+     ACADEMIC CARDS — education and certification rows, styled
+     like the experience cards but static (no click/modal).
+     ============================================================ */
+  .edu-card,
+  .cert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--color-surface);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-rest);
+    padding: 1rem 1.15rem;
+    transition: border-color var(--duration-interaction) var(--easing-interaction);
+  }
+  .edu-card:hover,
+  .cert-card:hover {
+    border-color: var(--color-accent);
+  }
+  .edu-card .icon-chip,
+  .cert-card .icon-chip {
+    width: 2.1rem;
+    height: 2.1rem;
+    margin-top: 0.1rem;
+  }
+
+  /* ============================================================
+     EXPERIENCE CARD — compact horizontal row, now an interactive
+     button: clicking it opens the job-detail modal (role summary
+     + skills) rather than showing the description inline.
+     ============================================================ */
+  .exp-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-rest);
+    padding: 1rem 1.15rem;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    transition: transform var(--duration-interaction) var(--easing-interaction),
+                box-shadow var(--duration-interaction) var(--easing-interaction),
+                border-color var(--duration-interaction) var(--easing-interaction);
+  }
+  .exp-card:hover,
+  .exp-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--color-accent);
+  }
+  .exp-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .exp-card .icon-chip {
+    width: 2.1rem;
+    height: 2.1rem;
+    margin-top: 0.1rem;
+  }
+  .exp-card-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-top: 0.2rem;
+    color: var(--color-foreground-muted);
+    transition: transform var(--duration-interaction) var(--easing-interaction),
+                color var(--duration-interaction) var(--easing-interaction);
+  }
+  .exp-card:hover .exp-card-chevron,
+  .exp-card:focus-visible .exp-card-chevron {
+    transform: translateX(3px);
+    color: var(--color-accent);
+  }
+
+  /* ============================================================
+     JOB MODAL — opens on clicking an experience card; shows the
+     role summary ("what he did") and the skills used/acquired
+     there.
+     ============================================================ */
+  .job-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgb(20 21 29 / 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-interaction) var(--easing-interaction);
+  }
+  .job-modal-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .job-modal-panel {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--primitive-shadow-xl);
+    padding: var(--spacing-card-padding);
+    transform: scale(0.96) translateY(8px);
+    transition: transform var(--duration-interaction) var(--easing-interaction);
+  }
+  .job-modal-backdrop.is-open .job-modal-panel {
+    transform: scale(1) translateY(0);
+  }
+  .job-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: none;
+    border-radius: var(--primitive-radius-full);
+    background: var(--color-surface-soft);
+    color: var(--color-foreground-muted);
+    cursor: pointer;
+    transition: background-color var(--duration-interaction) var(--easing-interaction),
+                color var(--duration-interaction) var(--easing-interaction);
+  }
+  .job-modal-close:hover,
+  .job-modal-close:focus-visible {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+  .job-modal-close:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .job-modal-section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-foreground-muted);
+    margin-bottom: 0.5rem;
+  }
+  .job-modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.1rem;
+  }
+  .job-modal-list li {
+    list-style: disc;
+  }
+
+  /* ============================================================
+     HERO PHOTO — right-hand column paired with the experience
+     list. The frame keeps a background-image as a fallback/
+     placeholder, but the actual <img> tag used in the markup is
+     what needs to be sized — it's absolutely positioned and
+     stretched to fill the frame with object-fit: cover so it
+     never leaves empty space below/around it.
+     ============================================================ */
+  .hero-photo-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--primitive-shadow-md);
+    background-image:
+      linear-gradient(160deg, rgba(238, 237, 251, 0.12) 0%, rgba(241, 241, 247, 0.12) 100%),
+      url('/work-section-img.jpg');
+    background-size: cover;
+    background-position: center top;
+  }
+  .hero-photo-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .hero-photo-badge {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    max-width: 15rem;
+    background: var(--color-surface);
+    border-radius: var(--primitive-radius-lg);
+    box-shadow: var(--primitive-shadow-md);
+    padding: 1rem 1.15rem;
+  }
+  @media (max-width: 1023px) {
+    .hero-photo-frame { aspect-ratio: 16 / 10; }
+  }
+
+  /* ============================================================
+     HIGHLIGHT CHIP ROW — echoes the rating/avatar strip in the
+     reference: icon chip + a short line of supporting copy
+     ============================================================ */
+  .highlight-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--card-border);
+    border-radius: var(--primitive-radius-full);
+    padding: 0.6rem 1.1rem 0.6rem 0.6rem;
+  }
+  .icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--icon-chip-bg);
+    color: var(--icon-chip-fg);
+    border-radius: var(--primitive-radius-full);
+    box-shadow: var(--card-shadow-rest);
+  }
+
+  /* ============================================================
+     SKILL FILTER TABS
+     ============================================================ */
+  .skill-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--color-surface);
+    border: 1px solid var(--card-border);
+    color: var(--color-foreground-muted);
+    border-radius: var(--primitive-radius-full);
+    padding: 0.5rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--duration-interaction) var(--easing-interaction),
+                border-color var(--duration-interaction) var(--easing-interaction),
+                color var(--duration-interaction) var(--easing-interaction);
+  }
+  .skill-filter-btn:hover,
+  .skill-filter-btn:focus-visible {
+    border-color: var(--color-accent);
+    color: var(--color-foreground);
+  }
+  .skill-filter-btn.is-active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--button-fg);
+  }
+  .skill-filter-btn .filter-count {
+    font-weight: 400;
+    opacity: 0.75;
+  }
+  .skill-filter-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ============================================================
+     SKILL TAG CLOUD
+     ============================================================ */
+  .skill-tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-surface);
+    border: 1px solid var(--card-border);
+    color: var(--color-foreground);
+    border-radius: var(--primitive-radius-full);
+    padding: 0.5rem 1.05rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 24rem;
+    transition: transform var(--duration-interaction) var(--easing-interaction),
+                opacity var(--duration-interaction) var(--easing-interaction),
+                border-color var(--duration-interaction) var(--easing-interaction),
+                background-color var(--duration-interaction) var(--easing-interaction),
+                max-width 380ms var(--easing-interaction),
+                padding 380ms var(--easing-interaction),
+                margin 380ms var(--easing-interaction);
+  }
+  .skill-tag.is-core {
+    font-size: 0.92rem;
+    background: var(--color-accent-soft);
+    border-color: var(--color-border-strong);
+    color: var(--badge-fg);
+  }
+  .skill-tag.is-support {
+    font-size: 0.78rem;
+    color: var(--color-foreground-muted);
+  }
+  .skill-tag:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+  /* Only the filterable cloud's tags are interactive buttons; the small
+     decorative tags reused in the Academic section stay plain spans. */
+  .skill-tag-cloud .skill-tag {
+    font: inherit;
+    cursor: pointer;
+  }
+  .skill-tag-cloud .skill-tag:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  .skill-tag.is-hidden {
+    opacity: 0;
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    border-width: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+  }
+
+  /* ============================================================
+     SKILL SOURCE CARD — richer skill entry showing where the skill
+     was learned or certified (a school or accreditation logo),
+     mirroring a LinkedIn skill-detail row.
+     ============================================================ */
+  .skill-source-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow-rest);
+    padding: 1.1rem 1.25rem;
+    transition: transform var(--duration-interaction) var(--easing-interaction),
+                box-shadow var(--duration-interaction) var(--easing-interaction),
+                border-color var(--duration-interaction) var(--easing-interaction);
+  }
+  .skill-source-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--color-accent);
+  }
+  .skill-source-card.is-hidden {
+    display: none;
+  }
+  .skill-source-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+  }
+  .skill-source-row:last-child {
+    margin-bottom: 0;
+  }
+  .skill-source-row .icon-chip {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     FLOATING ACTION BUTTONS
+     ============================================================ */
+  .float-btn {
+    position: fixed;
+    right: 1.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--primitive-radius-full);
+    box-shadow: var(--card-shadow-hover);
+    z-index: 60;
+    transition: opacity var(--duration-interaction) var(--easing-interaction),
+                transform var(--duration-interaction) var(--easing-interaction),
+                box-shadow var(--duration-interaction) var(--easing-interaction);
+  }
+  .float-btn:hover,
+  .float-btn:focus-visible {
+    transform: translateY(-3px);
+  }
+  .float-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .whatsapp-float-btn {
+    bottom: 1.5rem;
+    background: var(--primitive-color-whatsapp-500);
+    color: #ffffff;
+  }
+
+  .back-to-top-btn {
+    bottom: 5.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--card-border);
+    color: var(--color-accent);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+  }
+  .back-to-top-btn.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .back-to-top-btn:hover,
+  .back-to-top-btn:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+     ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+    transform-origin: center top;
+    transition: opacity 700ms var(--easing-interaction),
+                transform 700ms var(--easing-interaction);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link, .glass-card, .cta-button, .float-btn, .skill-filter-btn, .skill-tag {
+      transition-duration: 0.01ms !important;
+      transition-property: color, background-color, border-color, box-shadow !important;
+    }
+    .nav-link:hover, .nav-link:focus-visible,
+    .cta-button:hover, .cta-button:focus-visible,
+    .float-btn:hover, .float-btn:focus-visible {
+      transform: none !important;
+    }
+    .back-to-top-btn { transform: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+
+  /* ============================================================
+     HERO-STYLE NAV — mirrors the floating pill navigation used on
+     the home page hero, retuned to sit on this page's light
+     background (solid ink pill instead of a glass overlay).
+     ============================================================ */
+  .hero-nav-wrap {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    padding: 18px 18px 0;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-nav {
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    min-height: 58px;
+    padding: 7px 10px 7px 26px;
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    border: 1px solid rgba(17, 24, 23, .1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .55);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .hero-nav .nav-links {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 2.5vw, 31px);
+    min-width: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-nav .nav-links a {
+    display: inline-block;
+    color: rgba(17, 24, 23, .75);
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+
+  .hero-nav .nav-links a:hover,
+  .hero-nav .nav-links a:focus-visible {
+    color: #111817;
+    animation: nav-vibrate .3s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-nav .nav-links a:hover,
+    .hero-nav .nav-links a:focus-visible {
+      animation: none;
+    }
+  }
+
+  .hero-nav .nav-links a.is-current {
+    color: #111817;
+  }
+
+  @keyframes nav-vibrate {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(-1px, 1px) rotate(-1deg); }
+    40% { transform: translate(-1px, -1px) rotate(1deg); }
+    60% { transform: translate(1px, 1px) rotate(0deg); }
+    80% { transform: translate(1px, -1px) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  .hero-nav .nav-cta {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: #173f2d;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-decoration: none;
+    transition: background .2s ease;
+  }
+
+  .hero-nav .nav-cta:hover {
+    background: #214f39;
+  }
+
+  @media (max-width: 900px) {
+    .hero-nav {
+      gap: 14px;
+      padding-left: 18px;
+    }
+
+    .hero-nav .nav-links {
+      gap: 14px;
+    }
+
+    .hero-nav .nav-links a {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .hero-nav-wrap {
+      padding: 12px 12px 0;
+    }
+
+    .hero-nav {
+      min-height: 54px;
+      padding: 6px 7px 6px 16px;
+      gap: 10px;
+    }
+
+    .hero-nav .nav-links {
+      gap: 12px;
+    }
+
+    .hero-nav .nav-links a {
+      font-size: 11.5px;
+    }
+
+    .hero-nav .nav-cta {
+      min-height: 40px;
+      padding: 0 15px;
+    }
+  }
+
+  /* ============================================================
+     FOOTER
+     (Kept as the single richer definition — the plain earlier
+     footer/footer-inner block from this file was a duplicate of
+     an older layout and has been removed since this one below
+     fully supersedes it.)
+     ============================================================ */
+  footer {
+    padding: 58px 24px 26px;
+    background: #0d1312;
+    color: rgba(255,255,255,.68);
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .footer-inner {
+    width: min(1120px,100%); margin: 0 auto;
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 52px; align-items: start;
+  }
+  .footer-brand-wrap { display:flex; flex-direction:column; align-items:flex-start; }
+  .footer-brand {
+    width:58px; height:58px; display:grid; place-items:center;
+    border:1px solid rgba(255,255,255,.18); border-radius:18px;
+    background:rgba(255,255,255,.05); color:#fff; font-size:22px;
+    font-weight:900; letter-spacing:.04em; transition:.2s ease;
+  }
+  .footer-brand:hover { transform:translateY(-2px); background:rgba(255,255,255,.09); }
+  .footer-tagline { max-width:260px; margin:16px 0 0; color:rgba(255,255,255,.48); font-size:12px; line-height:1.7; }
+  .footer-column h3 { margin:0 0 17px; color:#fff; font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  .footer-links,.footer-social { display:flex; flex-direction:column; align-items:flex-start; gap:11px; font-size:13px; font-weight:600; }
+  .footer-links a,.footer-social a,.footer-legal a { color:rgba(255,255,255,.64); transition:.2s ease; }
+  .footer-links a:hover,.footer-social a:hover,.footer-legal a:hover { color:#fff; transform:translateX(2px); }
+  .footer-bottom {
+    width:min(1120px,100%); margin:44px auto 0; padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .copyright { font-size:11px; color:rgba(255,255,255,.45); }
+  .footer-legal { display:flex; flex-wrap:wrap; gap:22px; font-size:11px; font-weight:650; }
+
+  .footer-social a {
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+  .social-icon {
+    width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center;
+    flex:0 0 22px; border-radius:6px; font-size:15px; line-height:1;
+    background:rgba(255,255,255,.10); color:#fff;
+  }
+  .whatsapp-icon { font-size:14px; }
+  .email-icon { font-size:14px; }
+  .footer-linkedin-icon img {
+    width:22px; height:22px; display:block; object-fit:contain; flex:0 0 22px; border-radius:5px;
+  }
+  .footer-linkedin-icon {
+    position:static !important; width:auto !important; height:auto !important;
+    border-radius:0 !important; background:transparent !important;
+    box-shadow:none !important; color:rgba(255,255,255,.64) !important;
+    transform:none !important; line-height:normal !important;
+  }
+  .footer-linkedin-icon:hover { transform:translateX(2px) !important; box-shadow:none !important; }
+
+  @media (max-width:760px) {
+    .footer-inner { grid-template-columns:1fr 1fr; gap:38px 28px; }
+    .footer-brand-wrap { grid-column:1/-1; }
+    .footer-bottom { flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width:520px) {
+    footer { padding:48px 20px 24px; }
+    .footer-inner { grid-template-columns:1fr; gap:30px; }
+    .footer-brand-wrap { grid-column:auto; }
+    .footer-bottom { margin-top:36px; align-items:center; text-align:center; }
+    .footer-legal { justify-content:center; }
+  }
+
+  /* Floating LinkedIn icon */
+  .floating-linkedin {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 58px;
+    height: 58px;
+    display: block;
+    z-index: 9999;
+    border-radius: 50%;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 8px 24px rgba(0,0,0,.22);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .floating-linkedin img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  .floating-linkedin:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 30px rgba(0,0,0,.28);
+  }
+  .floating-linkedin:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+  }
+  @media (max-width: 600px) {
+    .floating-linkedin {
+      width: 48px;
+      height: 48px;
+      right: 14px;
+      bottom: 14px;
+    }
+  }
+
+  /* ============================================================
+     GLOBAL RESPONSIVE PASS
+     Keeps the existing visual design intact while making every
+     page adapt cleanly from small phones through large displays.
+     ============================================================ */
+  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  img, svg, video, canvas { max-width: 100%; }
+  img { height: auto; }
+  button, input, textarea, select { max-width: 100%; }
+  a { overflow-wrap: anywhere; }
+
+  /* Navigation: keep all navigation usable instead of allowing the
+     pill to become wider than the viewport. */
+  .hero-nav-wrap {
+    width: 100%;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  .hero-nav {
+    width: min(100%, max-content);
+    max-width: 100%;
+  }
+  .hero-nav .nav-links {
+    min-width: 0;
+  }
+
+  /* Long text should never force a horizontal scrollbar. */
+  .about-card, .glass-card, .detail-item, .exp-card, .skill-source-card,
+  .edu-card, .cert-card, .job-modal-panel, .contact-box, .contact-card,
+  .details-inner, .section, .footer-inner, main, section {
+    min-width: 0;
+  }
+
+  /* Floating controls respect phone safe areas. */
+  .floating-linkedin, .float-btn, .back-to-top-btn, .whatsapp {
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
+    .footer-inner {
+      gap: 32px;
+    }
+    .footer-links, .footer-social {
+      min-width: 0;
+    }
+    .footer-links a, .footer-social a {
+      overflow-wrap: anywhere;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-photo {
+      min-height: 480px;
+    }
+
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      min-height: 230px;
+    }
+  }
+
+  /* Phones */
+  @media (max-width: 680px) {
+    .hero-nav-wrap { padding-top: 10px; }
+    .hero-nav {
+      width: 100%;
+      min-height: 0;
+      padding: 8px 10px;
+      gap: 8px;
+      justify-content: center;
+    }
+    .hero-nav .nav-links {
+      display: flex !important;
+      flex: 1 1 100%;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 13px;
+      order: 1;
+    }
+    .hero-nav .nav-links a {
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 2px 0;
+    }
+    .hero-nav .nav-cta {
+      order: 2;
+      margin: 0 auto;
+      min-height: 36px;
+      padding: 0 16px;
+    }
+
+    .about-card {
+      max-width: 100%;
+      padding-left: clamp(18px, 5vw, 32px);
+      padding-right: clamp(18px, 5vw, 32px);
+    }
+    .about-card-body { gap: 18px; }
+    .about-card p { overflow-wrap: anywhere; }
+
+    .hero-content, .section, .details, .about-stage {
+      max-width: 100%;
+    }
+
+    .hero h1, .about-card h1 {
+      overflow-wrap: anywhere;
+    }
+
+    .hero-actions {
+      width: 100%;
+    }
+    .pill-button {
+      width: min(100%, 320px);
+    }
+
+    .footer-inner {
+      width: 100%;
+      grid-template-columns: 1fr !important;
+      flex-direction: column;
+      gap: 28px;
+      text-align: center;
+    }
+    .footer-brand-wrap,
+    .footer-column {
+      width: 100%;
+      grid-column: auto !important;
+      align-items: center;
+    }
+    .footer-tagline { margin-left: auto; margin-right: auto; }
+    .footer-links, .footer-social {
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .footer-bottom {
+      width: 100%;
+      flex-direction: column;
+      align-items: center !important;
+      text-align: center;
+      gap: 14px;
+    }
+    .footer-legal { justify-content: center; }
+
+    .floating-linkedin, .float-btn, .back-to-top-btn, .whatsapp {
+      right: max(12px, env(safe-area-inset-right));
+    }
+    .floating-linkedin { width: 50px; height: 50px; bottom: max(12px, env(safe-area-inset-bottom)); }
+    .float-btn { width: 50px; height: 50px; }
+
+    .job-modal-backdrop, .job-modal-panel {
+      max-width: 100vw;
+    }
+    .job-modal-panel {
+      width: calc(100vw - 24px) !important;
+      max-height: calc(100svh - 24px) !important;
+      margin: 12px;
+      overflow-y: auto;
+    }
+
+    .contact-box, .contact-card {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .brand {
+      font-size: 19px;
+    }
+
+    .hero-content {
+      width: min(100% - 28px, 600px);
+      padding: 55px 0 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.35rem, 12vw, 4rem);
+    }
+
+    .hero-copy {
+      font-size: 15px;
+    }
+
+    .scroll-note {
+      display: none;
+    }
+
+    .section {
+      width: min(100% - 28px, 1120px);
+      padding: 78px 0;
+    }
+
+    .about-photo {
+      min-height: 390px;
+    }
+
+    .contact-box {
+      border-radius: 26px;
+    }
+
+    .whatsapp {
+      right: 16px;
+      bottom: 16px;
+    }
+  }
+
+  /* Very small phones */
+  @media (max-width: 420px) {
+    .hero-nav .nav-links { gap: 5px 10px; }
+    .hero-nav .nav-links a { font-size: 10.5px; }
+    .hero-nav .nav-cta { min-height: 34px; font-size: 11px; }
+
+    .about-card { padding-top: 34px; padding-bottom: 34px; }
+    .about-card h1 { font-size: clamp(1.55rem, 8vw, 2rem); }
+
+    .floating-linkedin, .float-btn { width: 46px; height: 46px; }
+    .back-to-top-btn { width: 46px; height: 46px; }
+  }
+
+  /* Landscape phones: don't let viewport height crush content. */
+  @media (max-height: 600px) and (orientation: landscape) {
+    .hero-content { min-height: auto; padding-top: 50px; padding-bottom: 60px; }
+    .hero-nav-wrap { padding-top: 8px; }
+    .about-stage { min-height: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *,
+    *::before,
+    *::after {
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+    }
+  }

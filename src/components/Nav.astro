@@ -1,0 +1,13 @@
+---
+const { current = '' } = Astro.props;
+---
+<div class="hero-nav-wrap">
+  <nav class="hero-nav" aria-label="Primary navigation">
+    <div class="nav-links">
+      <a href="/" class:list={{ 'is-current': current === 'home' }} aria-current={current === 'home' ? 'page' : undefined}>Home</a>
+      <a href="/about" class:list={{ 'is-current': current === 'about' }} aria-current={current === 'about' ? 'page' : undefined}>About</a>
+      <a href="/work" class:list={{ 'is-current': current === 'work' }} aria-current={current === 'work' ? 'page' : undefined}>Work</a>
+    </div>
+    <a href="/contact" class="nav-cta">Let's Talk</a>
+  </nav>
+</div>

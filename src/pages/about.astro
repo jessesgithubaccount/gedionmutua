@@ -1,0 +1,54 @@
+---
+import '../styles/about.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getAbout } from '../lib/tina';
+
+const { data } = await getAbout();
+const page = data.about;
+---
+<BaseLayout title={page.title} description={page.seoDescription}>
+  <div class="about-page" id="top" style={`--about-bg: url('${page.backgroundImage}')`}>
+    <Nav current="about" />
+
+    <main class="about-stage">
+      <div class="stage-inner">
+        <article class="about-card">
+          <h1>{page.heading}</h1>
+          <div class="about-card-body">
+            {page.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </article>
+      </div>
+      <div class="bottom-rule" aria-hidden="true"></div>
+    </main>
+  </div>
+
+  <section class="details" id="skills">
+    <div class="details-inner">
+      {page.details.map((item) => (
+        <article class="detail-item">
+          <h2>{item.title}</h2>
+          <p>{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+
+  <button type="button" id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script>
+    const btn = document.getElementById('back-to-top');
+    if (btn) {
+      const update = () => btn.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+  </script>
+</BaseLayout>

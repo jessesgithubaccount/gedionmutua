@@ -1,0 +1,50 @@
+---
+import '../styles/home.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getHome } from '../lib/tina';
+
+const { data } = await getHome();
+const page = data.home;
+---
+<BaseLayout title={page.title} description={page.seoDescription}>
+  <div class="hero" id="home">
+    <video
+      class="hero-video"
+      poster={page.heroImage}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src="/videos/hero-section-vid.webm" type="video/webm" />
+    </video>
+
+    <Nav current="home" />
+
+    <div class="hero-content">
+      <p class="hero-kicker">{page.kicker}</p>
+
+      <h1>
+        <span>{page.headlineLine1}</span>
+        <span class="accent">{page.headlineAccent}</span>
+      </h1>
+
+      <p class="hero-copy">{page.copy}</p>
+
+      <a href="/work" class="scroll-note" aria-label="Scroll to work section">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </a>
+
+      <div class="hero-actions">
+        <a href="/work" class="pill-button pill-secondary">{page.workButton}</a>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
