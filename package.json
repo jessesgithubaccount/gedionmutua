@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/netlify": "latest",
+    "@astrojs/sitemap": "^3.7.4",
     "@tinacms/astro": "latest",
     "astro": "^7.3.2",
     "tinacms": "latest"

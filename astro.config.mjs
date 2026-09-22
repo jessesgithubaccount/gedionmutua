@@ -3,6 +3,8 @@ import netlify from '@astrojs/netlify';
 import tina from '@tinacms/astro/integration';
 import { tinaAdminDevRedirect } from '@tinacms/astro/vite';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   output: 'static',
 
@@ -14,9 +16,7 @@ export default defineConfig({
     },
   }),
 
-  integrations: [
-    tina(),
-  ],
+  integrations: [tina(), sitemap()],
 
   vite: {
     plugins: [
